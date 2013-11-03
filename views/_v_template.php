@@ -4,7 +4,7 @@
 	<title><?php if(isset($title)) echo $title; ?></title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
-					
+	<link href="/css/project2.css" rel="stylesheet" type="text/css"/>			
 	<!-- Controller Specific JS/CSS -->
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
 	
@@ -20,6 +20,7 @@
 
             <a href='/users/logout'>Logout</a>
             <a href='/users/profile'>Profile</a>
+            
 
         <!-- Menu options for users who are not logged in -->
         <?php else: ?>

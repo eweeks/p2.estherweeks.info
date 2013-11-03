@@ -1,0 +1,23 @@
+body{
+		background-color: grey;
+		font-family: Menlo, Consolas, "Courier New", monospace;
+	}
+	
+a:link {
+		text-decoration: none;
+		color: #A0222B;
+	}
+
+a:hover {
+		color:#5F9FDD;
+	}
+
+a:visited {
+		color: #A0222B;
+
+	}
+
+#menu{
+
+	
+	}
