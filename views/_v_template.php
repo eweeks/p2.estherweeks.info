@@ -24,6 +24,7 @@
   				<li><a href="/users/logout">Logout</a></li>
   				<li><a href="/posts">Posts</a></li>
   				<li><a href="/posts/users">Users</a></li>
+  				<li><a href="/posts/add">New Post</a></li>
 			</ul>
 
             
