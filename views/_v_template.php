@@ -53,8 +53,9 @@
 	<?php if(isset($content)) echo $content; ?>
 
 	<?php if(isset($client_files_body)) echo $client_files_body; ?>
-	</div>
 
+	</div>
+	
 <!-- javascript here so that the important stuff will load first.. -->
 	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script src="js/bootstrap.min.js"></script> <!--Must be second, this refers to jquery -->
