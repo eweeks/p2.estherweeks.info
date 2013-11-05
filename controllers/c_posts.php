@@ -135,5 +135,43 @@ class posts_controller extends base_controller {
     Router::redirect("/posts/users");
 
 	}
+	
+	public function edit(){
+	# If user is blank, they're not logged in; redirect them to the login page
+    if(!$this->user) {
+        Router::redirect('/users/login');
+    }
+    
+     # If they weren't redirected away, continue:
+
+    # Setup view
+    $this->template->content = View::instance('v_posts_edit');
+    $this->template->title   = "Posts of".$this->user->first_name;
+    
+    #query to only show users posts
+    $q = "SELECT
+    		posts.content, 
+    		posts.created, 
+    		posts.post_id,
+    		users.first_name, 
+    		users.last_name
+		FROM posts
+		INNER JOIN users
+			ON posts.user_id = users.user_id
+		WHERE users.user_id =".$this->user->user_id;
+        
+    # Execute the query to get all the posts. 
+    # Store the result array in the variable $posts
+      # Run the query, store the results in the variable $posts
+    $posts = DB::instance(DB_NAME)->select_rows($q);
+    
+     # Pass data (posts) to the view
+    $this->template->content->posts = $posts;
+
+    # Render template
+    echo $this->template;
+    
+	
+	}
     
 }

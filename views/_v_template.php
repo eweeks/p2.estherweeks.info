@@ -25,6 +25,7 @@
   				<li><a href="/posts">Posts</a></li>
   				<li><a href="/posts/users">Users</a></li>
   				<li><a href="/posts/add">New Post</a></li>
+  				<li><a href="/posts/edit">Your Posts</a></li>
 			</ul>
 
             
