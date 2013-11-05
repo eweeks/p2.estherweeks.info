@@ -12,7 +12,8 @@
         <?=Time::display($post['created'])?>
     </time>
     
-    <a href='/posts/delete/<?=$posts['post_id']?>'>Delete</a>
+    <a href='/posts/delete/<?=$post['post_id']?>'>Delete</a>
+   
 
 </article>
 

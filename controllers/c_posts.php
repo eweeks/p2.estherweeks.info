@@ -171,7 +171,16 @@ class posts_controller extends base_controller {
     # Render template
     echo $this->template;
     
+	}
 	
+	public function delete($post_id) {
+		$where_condition = 'WHERE post_id = '.$post_id;
+		DB::instance(DB_NAME)->delete('posts', $where_condition);
+		
+	# Send them back
+    Router::redirect("/posts/edit");
+
+
 	}
     
 }
