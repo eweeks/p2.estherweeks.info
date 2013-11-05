@@ -18,7 +18,7 @@
 
   			<div class="form-group">
     			<div class="col-sm-offset-2 col-sm-10">
-     	 			<button type="submit" class="btn btn-default">Sign Up!</button>
+     	 			<button type="submit" class="btn btn-default">Log in!</button>
     			</div>
   			</div>
 		</form>
@@ -35,6 +35,5 @@
         <br>
     <?php endif; ?>
 
-    <input type='submit' value='Log in'>
 
 </form>

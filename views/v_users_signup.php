@@ -5,25 +5,25 @@
  			 <div class="form-group">
     			<label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
    				<div class="col-sm-10">
-      				<input type="FirstName" class="form-control" id="inputFirstName" placeholder=FirstName">
+      				<input type="text" class="form-control" id="inputFirstName" placeholder="FirstName" name='first_name' >
    				</div>
   			</div>
   			<div class="form-group">
     			<label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
     			<div class="col-sm-10">
-     		 		<input type="LastName" class="form-control" id="LastName" placeholder="LastName">
+     		 		<input type="text" class="form-control" id="LastName" placeholder="LastName" name='last_name'>
     			</div>
   			</div>
   			<div class="form-group">
     			<label for="inputemail" class="col-sm-2 control-label">Email</label>
     			<div class="col-sm-10">
-     				<input type="Email" class="form-control" id="email" placeholder="Email">
+     				<input type="text" class="form-control" id="email" placeholder="Email" name='email'>
     			</div>
   			</div>
   			<div class="form-group">
     			<label for="Password" class="col-sm-2 control-label">Password</label>
     			<div class="col-sm-10">
-      				<input type="Password" class="form-control" id="Password" placeholder="Password">
+      				<input type="password" class="form-control" id="Password" placeholder="Password" name='password'>
     			</div>
   			</div>  
 
