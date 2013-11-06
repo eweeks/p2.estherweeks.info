@@ -38,7 +38,7 @@
 			<!--	Update Profile or Back to Profile	-->
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default" title="Update You Profile">Update!</button>
+					<button type="submit" class="btn btn-default" title="Update Your Profile">Update!</button>
 					<p><a href="/users/profile" title="Back to Profile">Back to Profile</a></p>
 				</div>
 			</div>
