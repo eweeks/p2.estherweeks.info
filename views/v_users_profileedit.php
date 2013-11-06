@@ -3,13 +3,13 @@
 		<h2 >Edit Profile</h2>
 		<form method='POST' action='/users/p_profile' class="form-horizontal" role="form" >
  			 <div class="form-group">
-    			<label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
+    			<label class="col-sm-2 control-label">First Name</label>
    				<div class="col-sm-10">
       				<input type="text" class="form-control" id="inputFirstName" placeholder="FirstName" name='first_name' >
    				</div>
   			</div>
   			<div class="form-group">
-    			<label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
+    			<label class="col-sm-2 control-label">Last Name</label>
     			<div class="col-sm-10">
      		 		<input type="text" class="form-control" id="LastName" placeholder="LastName" name='last_name'>
     			</div>
