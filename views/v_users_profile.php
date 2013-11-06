@@ -3,14 +3,13 @@
 
 <article>
 
-    <p>First Name: <?=$user->first_name?></p>
-    <p>Last Name: <?=$user->last_name?></p>
+	<p>First Name: <?=$user->first_name?></p>
+	<p>Last Name: <?=$user->last_name?></p>
 
-    <p>Location: <?=$user->location?></p>
-    <p>About: <?=$user->about?></p>
+	<p>Location: <?=$user->location?></p>
+	<p>About: <?=$user->about?></p>
 
 </article>
 
-  <a href="/users/profileedit">Edit Profile</a>
-  <a href="/users/resetp">Change Password </a>
-   
+<p><a href="/users/profileedit" title="Edit Profile">Edit Profile</a></p>
+<p><a href="/users/resetp" title="Change Password">Change Password </a></p>

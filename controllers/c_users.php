@@ -161,20 +161,6 @@ class users_controller extends base_controller {
     # Setup view
     $this->template->content = View::instance('v_users_profile');
     $this->template->title   = "Profile of".$this->user->first_name;
-
-    
-    
-    #query to only show users profile
-    $q ="SELECT 
-    		profile . * , 
-    		users.first_name, 
-    		users.last_name
-		FROM profile
-		INNER JOIN users 
-			ON profile.user_id = users.user_id
-		WHERE users.user_id =".$this->user->user_id;
-		
-	 $profile = DB::instance(DB_NAME)->select_rows($q);
 	 
 	# Pass data (profile) to the view
     $this->template->content->profile = $profile;

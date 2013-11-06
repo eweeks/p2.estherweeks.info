@@ -13,47 +13,34 @@
 
 <body>	
 	<div id='menu'>
-
-
-        <!-- Menu for users who are logged in -->
-        <?php if($user): ?>
-
-            <ul class="nav nav-tabs">
-  				<li><a href="/">Home</a></li>
- 				<li><a href="/users/profile">Profile</a></li>
-  				<li><a href="/users/logout">Logout</a></li>
-  				<li><a href="/posts">Posts</a></li>
-  				<li><a href="/posts/users">Users</a></li>
-  				<li><a href="/posts/add">New Post</a></li>
-  				<li><a href="/posts/edit">Your Posts</a></li>
+		<!-- Menu for users who are logged in -->
+		<?php if($user): ?>
+			<ul class="nav nav-tabs">
+				<li><a href="/" title="Home">Home</a></li>
+				<li><a href="/users/profile" title="Profile">Profile</a></li>
+				<li><a href="/posts/users" title="Users">Users</a></li>
+				<li><a href="/posts" title="Posts">Posts</a></li>
+				<li><a href="/posts/add" title="New Post">New Post</a></li>
+				<li><a href="/posts/edit" title="Your Posts">Your Posts</a></li>
+				<li><a href="/users/logout" title="Logout">Logout</a></li>
 			</ul>
 
-            
-            
-            
-
-        <!-- Menu options for users who are not logged in -->
-        <?php else: ?>
-
-            
-            <ul class="nav nav-tabs">
-  				<li><a href="/">Home</a></li>
- 				<li><a href="/users/signup">Sign up</a></li>
-  				<li><a href="/users/login">Log in</a></li>
+		<!-- Menu options for users who are not logged in -->
+		<?php else: ?>
+			<ul class="nav nav-tabs">
+				<li><a href="/" title="Home">Home</a></li>
+				<li><a href="/users/signup" title="Sign up">Sign up</a></li>
+				<li><a href="/users/login" title="Log in">Log in</a></li>
 			</ul>
 
-        <?php endif; ?>
+		<?php endif; ?>
 	
-    </div>
-    <div class="container"> <!--to hold it all, for bootstrap-->
-    
+	</div>
+	<!--Container, for bootstrap-->
+	<div class="container">
 
-    <br>
-
-	<?php if(isset($content)) echo $content; ?>
-
-	<?php if(isset($client_files_body)) echo $client_files_body; ?>
-
+		<?php if(isset($content)) echo $content; ?>
+		<?php if(isset($client_files_body)) echo $client_files_body; ?>
 	</div>
 	
 <!-- javascript here so that the important stuff will load first.. -->
@@ -61,4 +48,5 @@
 	<script src="js/bootstrap.min.js"></script> <!--Must be second, this refers to jquery -->
 
 </body>
+
 </html>
