@@ -45,11 +45,14 @@ class posts_controller extends base_controller {
 
 
 
-    public function add() {
+    public function add($error = NULL) {
 
         # Setup view
         $this->template->content = View::instance('v_posts_add');
         $this->template->title   = "New Post";
+		
+		# Pass data to the view
+    	$this->template->content->error = $error;
 
         # Render template
         echo $this->template;
@@ -62,6 +65,14 @@ class posts_controller extends base_controller {
     	# Setup view
         $this->template->content = View::instance('v_posts_posted');
         $this->template->title   = "Post Added";
+        
+        foreach($_POST as $key => $value){
+
+			if((empty($value)) || (!$value) || (trim($value) == "") ){
+				# Send them back to the login page
+        		Router::redirect("/posts/add/error");
+			}
+		}
 		
         # Associate this post with this user
         $_POST['user_id']  = $this->user->user_id;

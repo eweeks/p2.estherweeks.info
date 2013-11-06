@@ -7,6 +7,13 @@ class users_controller extends base_controller {
     } 
 
     public function index() {
+		if(!$this->user) {
+        	Router::redirect('/users/login');
+    	}else{
+    		Router::redirect('/users/profile');
+    		
+    	}
+
 
     }
 
@@ -30,7 +37,7 @@ class users_controller extends base_controller {
     	$this->template->title   = "Welcome to Bleats";
     	
     	foreach($_POST as $key => $value){
-			if((empty($value)) || (!$value) || ($value = "")){
+			if((empty($value)) || (!$value) || (trim($value) == "") ){
 				# Send them back to the login page
         	Router::redirect("/users/signup/error");
 			}
@@ -192,7 +199,7 @@ class users_controller extends base_controller {
 	public function p_profile( ){
 		foreach($_POST as $key => $value) { 
             #if blank, error
-            if((empty($value)) || (!$value) || ($value = "")) {
+			if((empty($value)) || (!$value) || (trim($value) == "") ){
                 Router::redirect("/users/profileedit/error");
             }
 		}
@@ -202,48 +209,18 @@ class users_controller extends base_controller {
 		#update user table
     	DB::instance(DB_NAME)->update("users", $_POST, 'WHERE user_id = '.$this->user->user_id);
 		Router::redirect("/users/profile");
-	/*	# Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)
-    	$_POST = DB::instance(DB_NAME)->sanitize($_POST);
-	
-	    $q = "SELECT user_id 
-        	FROM profile
-        	WHERE user_id = ".$this->user->user_id;
 
-    	$present = DB::instance(DB_NAME)->select_field($q);
-
-    	# No match
-    	if(!$present) {
-
-	     $q = "INSERT INTO profile 
-	    	(created, modified, user_id, location, about)
-			VALUES('".Time::now()."', 
-					'".Time::now()."', 
-					'".$this->user->user_id."', 
-					'".$_POST['location']."', 
-					'".$_POST['about']."')";
-        $profile = DB::instance(DB_NAME)->select_field($q);
-			echo "Updated";
-        
-		} else {
-
-			$q = "UPDATE profile 
-			 		SET 
-						location =  '".$_POST['location']."',
-						about =  '".$_POST['about']."',
-						modified ='".Time::now()."'
-        		WHERE user_id = ".$this->user->user_id;	
-        $profile = DB::instance(DB_NAME)->select_field($q);
-	    echo "Updated";
-		}
-		*/
 	
 	}
 	
-		public function resetp(){
+		public function resetp($error = NULL){
 			
 			# Setup view
     		$this->template->content = View::instance('v_users_resetp');
     		$this->template->title   = "Reset";
+    		
+    		# Pass data to the view
+    		$this->template->content->error = $error;
 			
 			# Render template
    			echo $this->template;
@@ -251,12 +228,18 @@ class users_controller extends base_controller {
 	
 		public function p_reset() {
 		
+		foreach($_POST as $key => $value){
+
+			if((empty($value)) || (!$value) || (trim($value) == "") ){
+				# Send them back to the login page
+        		Router::redirect("/users/resetp/error");
+			}
+		}	
+		
+		
 		# Encrypt the password  
    		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']); 
-   		/*$q = "UPDATE users 
-			 	SET 
-					password='".$new."'
-        		WHERE user_id = ".$this->user->user_id;	*/
+
 		
 		DB::instance(DB_NAME)->update("users", $_POST, 'WHERE user_id = '.$this->user->user_id);
    		

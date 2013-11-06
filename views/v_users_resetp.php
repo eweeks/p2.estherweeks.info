@@ -7,3 +7,9 @@
     <input type='submit' value='Reset'>
 
 </form> 
+    <?php if(isset($error)): ?>
+        <div class='error'>
+            <p>Fields must be set</p>
+        </div>
+        <br>
+    <?php endif; ?>
