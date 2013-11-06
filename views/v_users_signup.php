@@ -36,4 +36,11 @@
 	</div><!-- end class col-->
 </div><!--end class row -->
 
+    <?php if(isset($error)): ?>
+        <div class='error'>
+            Signup failed. Please double check your email, password and fill in all fields.
+        </div>
+        <br>
+    <?php endif; ?>
+
 

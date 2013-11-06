@@ -3,18 +3,21 @@ class users_controller extends base_controller {
 
     public function __construct() {
         parent::__construct();
-        //echo "users_controller construct called<br><br>";
+       
     } 
 
     public function index() {
 
     }
 
-    public function signup() {
+    public function signup($error = NULL) {
 
         # Setup view
             $this->template->content = View::instance('v_users_signup');
             $this->template->title   = "Sign Up";
+            
+        # Pass data to the view
+    		$this->template->content->error = $error;
 
         # Render template
             echo $this->template;
@@ -26,6 +29,14 @@ class users_controller extends base_controller {
 		$this->template->content = View::instance('v_users_firstlogin');
     	$this->template->title   = "Welcome to Bleats";
     	
+    	foreach($_POST as $key => $value){
+			if((empty($value)) || (!$value) || ($value = "")){
+				# Send them back to the login page
+        	Router::redirect("/users/signup/error");
+			}
+		
+		}
+    	
     	# More data we want stored with the user
     	$_POST['created']  = Time::now();
     	$_POST['modified'] = Time::now();
@@ -36,13 +47,22 @@ class users_controller extends base_controller {
 
     	# Create an encrypted token via their email address and a random string
     	$_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
+    	$email=$_POST['email'];
 
-   		# Insert this user into the database
-		$user_id = DB::instance(DB_NAME)->insert('users', $_POST);
 
-        # Render template
-        echo $this->template;
 
+		if(!$this->userObj->confirm_unique_email($email) ) {
+
+        	# Send them back to the login page
+        	Router::redirect("/users/signup/error");
+		
+		}else{
+			# Insert this user into the database
+			$user_id = DB::instance(DB_NAME)->insert('users', $_POST);
+			
+			# Render template
+        	echo $this->template;
+		}
 
     }
 
@@ -166,13 +186,7 @@ class users_controller extends base_controller {
 	}
 	
 	public function p_profile(){
-		
-		/*$q = "UPDATE users 
-			 		SET 
-						first_name = '".$_POST['first_name']."',
-						last_name = '".$_POST['last_name']."'
-        		WHERE user_id = ".$this->user->user_id;	*/
-		/*DB::instance(DB_NAME)->update("users", $data, "WHERE user_id = 56");*/
+
 		$where_condition = 'WHERE user_id = '.$this->user->user_id;
 		$name = $_POST['first_name'];
     	DB::instance(DB_NAME)->update("users", $_POST, 'WHERE user_id = '.$this->user->user_id);
