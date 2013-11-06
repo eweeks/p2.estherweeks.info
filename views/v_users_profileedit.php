@@ -14,18 +14,19 @@
      		 		<input type="text" class="form-control" id="LastName" placeholder="LastName" name='last_name'>
     			</div>
   			</div>
-  			<!--<div class="form-group">
-    			<label for="inputemail" class="col-sm-2 control-label">Location</label>
+  			<div class="form-group">
+    			<label class="col-sm-2 control-label">Location</label>
     			<div class="col-sm-10">
-     				<input type="text" class="form-control" id="email" placeholder="Email" name='location'>
+     				<input type="text" class="form-control" id="location" placeholder="Location" name='location'>
     			</div>
   			</div>
+  		
   			<div class="form-group">
-    			<label for="About" class="col-sm-2 control-label">About</label>
+    			<label class="col-sm-2 control-label">About</label>
     			<div class="col-sm-10">
       				<input type="about" class="form-control" id="about" placeholder="About" name='about'>
     			</div>
-  			</div>  -->
+  			</div>
 
   			<div class="form-group">
     			<div class="col-sm-offset-2 col-sm-10">
@@ -36,4 +37,9 @@
 	</div><!-- end class col-->
 </div><!--end class row -->
 
-
+    <?php if(isset($error)): ?>
+        <div class='error'>
+            Please fill in all fields
+        </div>
+        <br>
+    <?php endif; ?>

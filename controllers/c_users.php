@@ -178,17 +178,28 @@ class users_controller extends base_controller {
 	
 	}
 	
-	public function profileedit(){
+	public function profileedit($error = NULL){
 		$this->template->content = View::instance('v_users_profileedit');
     	$this->template->title   = "Edit Profile";
+    	
+    	#error
+    	$this->template->content->error = $error;
+    	
     	# Render template
         echo $this->template;
 	}
 	
-	public function p_profile(){
-
+	public function p_profile( ){
+		foreach($_POST as $key => $value) { 
+            #if blank, error
+            if((empty($value)) || (!$value) || ($value = "")) {
+                Router::redirect("/users/profileedit/error");
+            }
+		}
+		
 		$where_condition = 'WHERE user_id = '.$this->user->user_id;
-		$name = $_POST['first_name'];
+		
+		#update user table
     	DB::instance(DB_NAME)->update("users", $_POST, 'WHERE user_id = '.$this->user->user_id);
 		Router::redirect("/users/profile");
 	/*	# Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)

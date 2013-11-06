@@ -57,11 +57,12 @@ class posts_controller extends base_controller {
     }
 
     public function p_add() {
+
     
     	# Setup view
         $this->template->content = View::instance('v_posts_posted');
         $this->template->title   = "Post Added";
-	
+		
         # Associate this post with this user
         $_POST['user_id']  = $this->user->user_id;
 
