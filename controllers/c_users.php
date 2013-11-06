@@ -7,7 +7,7 @@ class users_controller extends base_controller {
     } 
 
     public function index() {
-        echo "This is the index page";
+
     }
 
     public function signup() {
@@ -22,8 +22,9 @@ class users_controller extends base_controller {
     }
 
     public function p_signup() {
-		 #Dump out the results of POST to see what the form submitted
-    	// print_r($_POST);
+			
+		$this->template->content = View::instance('v_users_firstlogin');
+    	$this->template->title   = "Welcome to Bleats";
     	
     	# More data we want stored with the user
     	$_POST['created']  = Time::now();
@@ -39,9 +40,8 @@ class users_controller extends base_controller {
    		# Insert this user into the database
 		$user_id = DB::instance(DB_NAME)->insert('users', $_POST);
 
-    	# For now, just confirm they've signed up - 
-    	# You should eventually make a proper View for this
-    	echo 'You\'re signed up';
+        # Render template
+        echo $this->template;
 
 
     }
@@ -121,6 +121,7 @@ class users_controller extends base_controller {
 
     }
     
+    
 	public function profile() {
 
     # If user is blank, they're not logged in; redirect them to the login page
@@ -133,13 +134,97 @@ class users_controller extends base_controller {
     # Setup view
     $this->template->content = View::instance('v_users_profile');
     $this->template->title   = "Profile of".$this->user->first_name;
+    # Render template
+    echo $this->template;
+    
+    /*
+    #query to only show users profile
+    $q ="SELECT 
+    		profile . * , 
+    		users.first_name, 
+    		users.last_name
+		FROM profile
+		INNER JOIN users 
+			ON profile.user_id = users.user_id
+		WHERE users.user_id =".$this->user->user_id;
+		
+	 $profile = DB::instance(DB_NAME)->select_rows($q);
+	 
+	# Pass data (profile) to the view
+    $this->template->content->profile = $profile;
+    
 
     # Render template
     echo $this->template;
 	
 	}
 	
+	public function profileedit(){
+		$this->template->content = View::instance('v_users_profileedit');
+    	$this->template->title   = "Edit Profile";
+    	# Render template
+        echo $this->template;
+	}
+	
+	public function p_profile(){
 
+		# Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)
+    	$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+	
+	    $q = "SELECT user_id 
+        	FROM profile
+        	WHERE user_id = ".$this->user->user_id;
+
+    	$present = DB::instance(DB_NAME)->select_field($q);
+
+    	# No match
+    	if(!$present) {
+
+	     $q = "INSERT INTO profile 
+	    	(created, modified, user_id, location, about)
+			VALUES('".Time::now()."', 
+					'".Time::now()."', 
+					'".$this->user->user_id."', 
+					'".$_POST['location']."', 
+					'".$_POST['about']."')";
+        $profile = DB::instance(DB_NAME)->select_field($q);
+			echo "Updated";
+        
+		} else {
+
+			$q = "UPDATE profile 
+			 		SET 
+						location =  '".$_POST['location']."',
+						about =  '".$_POST['about']."',
+						modified ='".Time::now()."'
+        		WHERE user_id = ".$this->user->user_id;	
+        $profile = DB::instance(DB_NAME)->select_field($q);
+	    echo "Updated";
+		}
+		*/
+	
+	}
+	
+		public function resetp(){
+			
+			# Setup view
+    		$this->template->content = View::instance('v_users_resetp');
+    		$this->template->title   = "Reset";
+			
+			# Render template
+   			echo $this->template;
+		}
+	
+		public function p_reset() {
+		
+		# Encrypt the password  
+   		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+   		# Send them back to the main index.
+        Router::redirect('/users/login');
+   		
+		
+		
+		}
 	
 
 } # end of the class
