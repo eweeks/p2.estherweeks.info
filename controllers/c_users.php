@@ -134,8 +134,7 @@ class users_controller extends base_controller {
     # Setup view
     $this->template->content = View::instance('v_users_profile');
     $this->template->title   = "Profile of".$this->user->first_name;
-    # Render template
-    echo $this->template;
+
     
     
     #query to only show users profile
@@ -167,8 +166,18 @@ class users_controller extends base_controller {
 	}
 	
 	public function p_profile(){
-
-		# Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)
+		
+		/*$q = "UPDATE users 
+			 		SET 
+						first_name = '".$_POST['first_name']."',
+						last_name = '".$_POST['last_name']."'
+        		WHERE user_id = ".$this->user->user_id;	*/
+		/*DB::instance(DB_NAME)->update("users", $data, "WHERE user_id = 56");*/
+		$where_condition = 'WHERE user_id = '.$this->user->user_id;
+		$name = $_POST['first_name'];
+    	DB::instance(DB_NAME)->update("users", $_POST, 'WHERE user_id = '.$this->user->user_id);
+		Router::redirect("/users/profile");
+	/*	# Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)
     	$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 	
 	    $q = "SELECT user_id 
@@ -201,7 +210,7 @@ class users_controller extends base_controller {
         $profile = DB::instance(DB_NAME)->select_field($q);
 	    echo "Updated";
 		}
-		
+		*/
 	
 	}
 	
@@ -218,7 +227,14 @@ class users_controller extends base_controller {
 		public function p_reset() {
 		
 		# Encrypt the password  
-   		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+   		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']); 
+   		/*$q = "UPDATE users 
+			 	SET 
+					password='".$new."'
+        		WHERE user_id = ".$this->user->user_id;	*/
+		
+		DB::instance(DB_NAME)->update("users", $_POST, 'WHERE user_id = '.$this->user->user_id);
+   		
    		# Send them back to the main index.
         Router::redirect('/users/login');
    		
