@@ -137,7 +137,7 @@ class users_controller extends base_controller {
     # Render template
     echo $this->template;
     
-    /*
+    
     #query to only show users profile
     $q ="SELECT 
     		profile . * , 
@@ -201,7 +201,7 @@ class users_controller extends base_controller {
         $profile = DB::instance(DB_NAME)->select_field($q);
 	    echo "Updated";
 		}
-		*/
+		
 	
 	}
 	
