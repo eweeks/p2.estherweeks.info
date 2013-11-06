@@ -1,23 +1,49 @@
-body{
-		background-color: grey;
-		font-family: Menlo, Consolas, "Courier New", monospace;
-	}
-	
-a:link {
-		text-decoration: none;
-		color: #A0222B;
-	}
+h1{
+	padding:0;
+	margin:0;
+	border:0;
+}
 
-a:hover {
-		color:#5F9FDD;
-	}
+article h1{
+	font-size: 2em;
 
-a:visited {
-		color: #A0222B;
+}
 
-	}
+p{
+	font-size: 1.5em;
+	font-weight: 300;
+	padding-left: 1em;
+}
 
-#menu{
+time{
+	font-size: .5em;
+  	font-style: italic;
+}
 
-	
-	}
+img{
+	margin:0;
+	padding:0;
+	border:0;
+}
+
+#logo{
+	padding: 1em;
+	padding-left: .5em;
+	font-size: 2em;
+}
+
+.container{
+	padding-top: 1.5em;
+	padding-left: 4em;
+}
+
+ .container ul {
+	list-style: none outside none;
+	padding-top: 2em; 
+}
+
+.container ul li{
+	padding: 1em;
+	padding-left: 0;
+
+}

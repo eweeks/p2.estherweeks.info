@@ -5,6 +5,7 @@
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 	<link href="/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/css/project2.css" rel="stylesheet" />
 	<script src="/js/respond.js"></script>
 	<!-- Controller Specific JS/CSS -->
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
@@ -16,6 +17,8 @@
 		<!-- Menu for users who are logged in -->
 		<?php if($user): ?>
 			<ul class="nav nav-tabs">
+				<li><img src="/images/sheep.png" class=" img-responsive " alt="Sheep picture"></li>
+				<li id="logo">Bleats</li>
 				<li><a href="/" title="Home">Home</a></li>
 				<li><a href="/users/profile" title="Profile">Profile</a></li>
 				<li><a href="/posts/users" title="Users">Users</a></li>

@@ -7,7 +7,7 @@
 			<time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
 				<?=Time::display($post['created'])?>
 			</time>
-
+			<br><br>
 		</article>
 
 	<?php endforeach; ?>
